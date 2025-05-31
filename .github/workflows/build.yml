@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     container: node:16-alpine 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Install dependencies 
         run: npm install
@@ -22,3 +22,9 @@ jobs:
         run: |
           cp -R node_modules/@antora/lunr-extension/supplemental_ui/* supplemental-ui/ 
           npx antora local-antora-playbook.yml --fetch 
+
+      - name: Upload docs
+        uses: actions/upload-artifact@v4.6.2
+        with:
+           name: docs 
+           path: docs/ 
